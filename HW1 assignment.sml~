@@ -1,0 +1,46 @@
+(*programming assignment 1: SML programming language by SETABI ISAAC *)
+
+(*the contract: is_older takes two dates and eveluates to true or false*)
+fun is_oder (date1: int*int*int, date2: int*int*int)=
+    if 1# date1 <> 1# date2 then #1 date1 < #1 date2
+    else if #2 date1 <> #2 date2 then #2 date1 < #2 date2
+    else #3 date1 < #3 date2;
+
+(*contract: number_in_month takes a list of dates and a month and returns how many dates in the list are in the month*)
+fun number_in_month(dates: (int*int*int)list, month:int)=
+    if null(dates) (*checking for base condition*)
+    then 0
+    else if #2(hd dates)=month
+    then 1 + number_in_month(tl dates, month)(*recursion*)
+    else number_in_month(tl dates, month);
+
+(*contract: number_in_months takes a list of dates and a list of months and returns the number of dates in the list of dates that are in any of the months in the list of months*)
+fun number_in_months (date: (int*int*int)list, months: int list)=
+    if null(months)
+    then 0
+    else number_in_month(date, hd months) + number_in_months(date, tl months);
+
+(*contract: dates_in_month takes a list of dates and a month and returns a list holding the dates from the argument list of dates that are in the month*)
+fun dates_in_month (date: (int*int*int)list, month:int)=
+    if null(date)
+    then []
+    else if #2(hd date)=month
+    then hd date :: dates_in_month(t1 date, month)
+    else dates_in_month(tl date, month);
+
+(*contract: dates_in_months takes a list of dates and a list of months and returns a list holding the dates from the argument list of dates that are in any of the months in the list of months*)
+fun dates_in_months (dates: (int*int*int)list, months: int list)=
+    if null (months)
+    then []
+     (*recursion and using @ operator to append lists*)
+    else dates_in_month(dates, hd months) @ dates_in_months(dates, tl months);
+
+(*get_nth takes a list of strings and an int n. and returns the nth element of the list where the head of the list is 1st. condition if the list has too few elements, your function should apply hd to the empty list*)
+fun get_nth (str: string list, n: int)=
+    if n=1 (*testing for base condition*)
+    then hd str
+    else get_nth(tl str, n-1);
+
+(*contract: date_to_string takes a date and returns a s
+
+		
